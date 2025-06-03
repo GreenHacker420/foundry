@@ -50,6 +50,16 @@ This application provides a comprehensive dashboard for pizza order management w
 - **Filtering**: Filter orders by status
 - **Search**: Real-time search across multiple fields
 
+### 🚀 Real-Time Features (NEW!)
+- **Live Order Updates**: Server-Sent Events (SSE) for real-time order status changes
+- **Animated Progress Indicators**: Visual progress tracking through order stages:
+  - 📥 Received → 👨‍🍳 Preparing → 🔥 Baking → 🚚 Out for Delivery → ✅ Delivered
+- **Countdown Timers**: Live delivery time estimates with urgency indicators
+- **Connection Status**: Real-time connection monitoring with auto-reconnect
+- **Visual Feedback**: Recently updated orders highlighted with animations
+- **Expandable Details**: Click "View Details" to see full progress timeline
+- **Offline Fallback**: Graceful degradation when connection is lost
+
 ## 🛠️ Local Development Setup
 
 ### Prerequisites
@@ -219,6 +229,14 @@ src/
 - **Font Optimization**: Google Fonts with Next.js font optimization
 - **Bundle Optimization**: Automatic code splitting and optimization
 
+### Real-Time Architecture
+- **Server-Sent Events (SSE)**: Primary real-time communication method
+- **Custom React Hook**: `useRealTimeOrders` for state management
+- **Automatic Reconnection**: Smart retry logic with exponential backoff
+- **Connection Monitoring**: Heartbeat system with visual status indicators
+- **Graceful Degradation**: Offline mode when connection fails
+- **Memory Management**: Automatic cleanup and connection limits
+
 ## 🧪 Testing Recommendations
 
 To ensure the application works correctly, test the following scenarios:
@@ -238,6 +256,14 @@ To ensure the application works correctly, test the following scenarios:
    - Search functionality
    - Status filtering
    - Mobile table responsiveness
+
+4. **Real-Time Features**
+   - Connection status indicator (should show "Connected" with green indicator)
+   - Live order updates (orders will automatically update every 5-15 seconds)
+   - Progress indicators showing current stage with animations
+   - Countdown timers for active orders
+   - Expandable row details with full progress timeline
+   - Recently updated orders highlighted in orange
 
 ## 🔮 Future Enhancements
 
