@@ -75,7 +75,7 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
               >
                 <button
                   type="submit"
-                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-red-600 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-red-600 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors hover:scale-105 active:scale-95 transform duration-200"
                 >
                   <LogOut className="w-4 h-4 mr-2" />
                   <span className="hidden md:block">Sign Out</span>
