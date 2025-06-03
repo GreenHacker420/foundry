@@ -1,8 +1,8 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, PieChart, Pie, Cell, Area, AreaChart
 } from 'recharts'
 import { TrendingUp, Pizza, Clock, DollarSign } from 'lucide-react'

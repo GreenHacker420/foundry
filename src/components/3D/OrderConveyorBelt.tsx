@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { OrderProgress, OrderStage } from '@/types'
+import { OrderProgress } from '@/types'
 import { Circle, ChefHat, Flame, Truck, CheckCircle } from 'lucide-react'
 
 interface OrderConveyorBeltProps {
@@ -55,7 +55,7 @@ export default function OrderConveyorBelt({ progress, orderId, compact = false }
   const currentPosition = STAGE_POSITIONS[progress.currentStage]
   
   if (compact) {
-    return <CompactConveyorBelt progress={progress} orderId={orderId} />
+    return <CompactConveyorBelt progress={progress} />
   }
 
   return (
@@ -125,7 +125,7 @@ export default function OrderConveyorBelt({ progress, orderId, compact = false }
 
       {/* Stage Stations */}
       <div className="flex justify-between items-center mt-6">
-        {progress.stages.map((stage, index) => {
+        {progress.stages.map((stage) => {
           const config = STAGE_CONFIG[stage.stage]
           const Icon = config.icon
           const isActive = stage.stage === progress.currentStage
@@ -211,7 +211,7 @@ export default function OrderConveyorBelt({ progress, orderId, compact = false }
 }
 
 // Compact version for table rows
-function CompactConveyorBelt({ progress, orderId }: { progress: OrderProgress, orderId: string }) {
+function CompactConveyorBelt({ progress }: { progress: OrderProgress }) {
   const currentPosition = STAGE_POSITIONS[progress.currentStage]
 
   return (

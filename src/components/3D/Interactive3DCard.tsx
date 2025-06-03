@@ -6,19 +6,15 @@ import { useState, useRef } from 'react'
 interface Interactive3DCardProps {
   children: React.ReactNode
   className?: string
-  intensity?: number
   enableTilt?: boolean
   enableGlow?: boolean
-  enableFloat?: boolean
 }
 
 export default function Interactive3DCard({
   children,
   className = '',
-  intensity = 10,
   enableTilt = true,
-  enableGlow = true,
-  enableFloat = false
+  enableGlow = true
 }: Interactive3DCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -30,15 +26,12 @@ export default function Interactive3DCard({
     const rect = cardRef.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-    
+
     const mouseX = e.clientX - centerX
     const mouseY = e.clientY - centerY
-    
+
     setMousePosition({ x: mouseX, y: mouseY })
   }
-
-  const tiltX = enableTilt ? (mousePosition.y / 10) * intensity : 0
-  const tiltY = enableTilt ? -(mousePosition.x / 10) * intensity : 0
 
   return (
     <motion.div

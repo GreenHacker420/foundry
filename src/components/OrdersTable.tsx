@@ -2,15 +2,13 @@
 
 import React, { useState, useMemo } from "react"
 import { mockOrders } from "@/data/mockOrders"
-import { PizzaOrder, OrderStatus } from "@/types"
+import { OrderStatus } from "@/types"
 import { Search, Filter, ChevronUp, ChevronDown, Clock, Zap } from "lucide-react"
 import clsx from "clsx"
 import { useRealTimeOrders } from "@/hooks/useRealTimeOrders"
-import OrderProgressIndicator from "./OrderProgressIndicator"
 import CountdownTimer from "./CountdownTimer"
 import ConnectionStatus from "./ConnectionStatus"
 import OrderConveyorBelt from "./3D/OrderConveyorBelt"
-import Interactive3DCard from "./3D/Interactive3DCard"
 
 type SortField = 'id' | 'customerName' | 'pizzaType' | 'quantity' | 'orderDate' | 'status'
 type SortDirection = 'asc' | 'desc'
@@ -58,7 +56,7 @@ export default function OrdersTable() {
   }
 
   const filteredAndSortedOrders = useMemo(() => {
-    let filtered = orders.filter(order => {
+    const filtered = orders.filter(order => {
       const matchesSearch =
         order.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -70,8 +68,8 @@ export default function OrdersTable() {
     })
 
     return filtered.sort((a, b) => {
-      let aValue: any = a[sortField]
-      let bValue: any = b[sortField]
+      let aValue: string | number = a[sortField]
+      let bValue: string | number = b[sortField]
 
       if (sortField === 'orderDate') {
         aValue = new Date(aValue).getTime()

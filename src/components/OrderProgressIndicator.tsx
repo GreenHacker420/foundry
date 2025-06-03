@@ -1,6 +1,6 @@
 "use client"
 
-import { OrderProgress, OrderStage } from '@/types'
+import { OrderProgress } from '@/types'
 import { Clock, ChefHat, Flame, Truck, CheckCircle, Circle } from 'lucide-react'
 import clsx from 'clsx'
 
@@ -111,7 +111,6 @@ export default function OrderProgressIndicator({
 }
 
 function CompactProgressIndicator({ progress, showTimer }: { progress: OrderProgress, showTimer: boolean }) {
-  const currentStageIndex = progress.stages.findIndex(s => s.stage === progress.currentStage)
   const completedStages = progress.stages.filter(s => s.completed).length
   const totalStages = progress.stages.length
   const progressPercentage = (completedStages / totalStages) * 100
