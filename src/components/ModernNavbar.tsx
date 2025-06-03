@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
@@ -86,10 +87,12 @@ export default function ModernNavbar({
   const ProfileAvatar = () => (
     <div className="relative">
       {userImage && !imageError ? (
-        <img
+        <Image
           className="h-8 w-8 rounded-full border-2 border-orange-200 dark:border-orange-600 object-cover"
           src={userImage}
           alt={userName || 'User'}
+          width={32}
+          height={32}
           onError={() => setImageError(true)}
         />
       ) : (

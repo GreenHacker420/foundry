@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Home, ShoppingCart, LogOut, BarChart3, Users, Menu, X } from "lucide-react"
 import DashboardHeader, { UserMenu } from "./DashboardHeader"
 import { useState } from "react"
@@ -142,10 +143,12 @@ export default function DashboardLayoutClient({
               <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
                 <div className="flex items-center px-3 py-2">
                   {userImage && (
-                    <img
+                    <Image
                       className="h-10 w-10 rounded-full border-2 border-orange-200 dark:border-orange-600"
                       src={userImage}
                       alt={userName || 'User'}
+                      width={40}
+                      height={40}
                     />
                   )}
                   <div className="ml-3">
