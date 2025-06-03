@@ -23,7 +23,6 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
                 className="h-20 w-20 rounded-full border-4 border-orange-300 dark:border-orange-600 shadow-lg"
                 src={userImage}
                 alt={userName || 'User'}
-                whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.3 }}
               />
             )}
@@ -56,9 +55,8 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Interactive3DCard className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center">
-            <motion.div 
+            <motion.div
               className="p-3 bg-blue-100 dark:bg-blue-900 rounded-xl"
-              whileHover={{ rotate: 10, scale: 1.1 }}
             >
               <ShoppingCart className="h-6 w-6 text-blue-600 dark:text-blue-400" />
             </motion.div>
@@ -78,9 +76,8 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
 
         <Interactive3DCard className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center">
-            <motion.div 
+            <motion.div
               className="p-3 bg-green-100 dark:bg-green-900 rounded-xl"
-              whileHover={{ rotate: 10, scale: 1.1 }}
             >
               <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
             </motion.div>
@@ -100,9 +97,8 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
 
         <Interactive3DCard className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center">
-            <motion.div 
+            <motion.div
               className="p-3 bg-yellow-100 dark:bg-yellow-900 rounded-xl"
-              whileHover={{ rotate: 10, scale: 1.1 }}
             >
               <Clock className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
             </motion.div>
@@ -122,9 +118,8 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
 
         <Interactive3DCard className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center">
-            <motion.div 
+            <motion.div
               className="p-3 bg-orange-100 dark:bg-orange-900 rounded-xl"
-              whileHover={{ rotate: 10, scale: 1.1 }}
             >
               <TrendingUp className="h-6 w-6 text-orange-600 dark:text-orange-400" />
             </motion.div>
@@ -149,18 +144,15 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
           🚀 Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Interactive3DCard 
+          <Interactive3DCard
             className="group"
-            enableTilt={true}
-            enableGlow={true}
           >
             <Link
               href="/dashboard/orders"
               className="flex flex-col items-center p-6 border border-gray-200 dark:border-gray-600 rounded-xl hover:border-orange-300 hover:bg-orange-50 dark:hover:bg-gray-700 transition-all duration-300"
             >
-              <motion.div 
+              <motion.div
                 className="p-4 bg-orange-100 dark:bg-orange-900 rounded-xl group-hover:bg-orange-200 dark:group-hover:bg-orange-800 mb-4"
-                whileHover={{ rotate: 10, scale: 1.1 }}
               >
                 <ShoppingCart className="h-8 w-8 text-orange-600 dark:text-orange-400" />
               </motion.div>
@@ -178,9 +170,8 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
               href="/dashboard/analytics"
               className="flex flex-col items-center p-6 border border-gray-200 dark:border-gray-600 rounded-xl hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-300"
             >
-              <motion.div 
+              <motion.div
                 className="p-4 bg-blue-100 dark:bg-blue-900 rounded-xl group-hover:bg-blue-200 dark:group-hover:bg-blue-800 mb-4"
-                whileHover={{ rotate: 10, scale: 1.1 }}
               >
                 <BarChart3 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
               </motion.div>
@@ -198,9 +189,8 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
               href="/dashboard/staff"
               className="flex flex-col items-center p-6 border border-gray-200 dark:border-gray-600 rounded-xl hover:border-purple-300 hover:bg-purple-50 dark:hover:bg-gray-700 transition-all duration-300"
             >
-              <motion.div 
+              <motion.div
                 className="p-4 bg-purple-100 dark:bg-purple-900 rounded-xl group-hover:bg-purple-200 dark:group-hover:bg-purple-800 mb-4"
-                whileHover={{ rotate: 10, scale: 1.1 }}
               >
                 <Users className="h-8 w-8 text-purple-600 dark:text-purple-400" />
               </motion.div>
@@ -215,9 +205,8 @@ export default function DashboardHomeContent({ userImage, userName }: DashboardH
             enableGlow={true}
           >
             <div className="flex flex-col items-center p-6 border border-gray-200 dark:border-gray-600 rounded-xl opacity-60">
-              <motion.div 
+              <motion.div
                 className="p-4 bg-gray-100 dark:bg-gray-700 rounded-xl mb-4"
-                whileHover={{ rotate: 10, scale: 1.1 }}
               >
                 <TrendingUp className="h-8 w-8 text-gray-400" />
               </motion.div>

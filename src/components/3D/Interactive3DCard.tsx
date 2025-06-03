@@ -51,10 +51,10 @@ export default function Interactive3DCard({
       }}
       onMouseMove={handleMouseMove}
       animate={{
-        rotateX: tiltX,
-        rotateY: tiltY,
-        scale: isHovered ? 1.02 : 1,
-        y: enableFloat && isHovered ? -5 : 0
+        rotateX: 0,
+        rotateY: 0,
+        scale: 1,
+        y: 0
       }}
       transition={{
         type: "spring",
@@ -132,7 +132,6 @@ export function CheesePullButton({
       onMouseDown={() => setIsPressed(true)}
       onMouseUp={() => setIsPressed(false)}
       onClick={onClick}
-      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
       {/* Cheese stretch effect */}
@@ -212,17 +211,12 @@ export function FloatingPizzaIcon({
       onHoverEnd={() => setIsHovered(false)}
       onClick={onClick}
       animate={{
-        y: [0, -5, 0],
-        rotate: isHovered ? [0, 5, -5, 0] : 0,
-        scale: isHovered ? 1.1 : 1
+        y: 0,
+        rotate: 0,
+        scale: 1
       }}
       transition={{
-        y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-        rotate: { duration: 0.5, repeat: Infinity },
-        scale: { duration: 0.2 }
-      }}
-      whileHover={{ 
-        boxShadow: "0 10px 30px rgba(251, 146, 60, 0.3)" 
+        duration: 0.2
       }}
       whileTap={{ scale: 0.95 }}
     >
@@ -232,14 +226,10 @@ export function FloatingPizzaIcon({
           <motion.span
             key={index}
             className="text-xs"
-            animate={isHovered ? {
-              scale: [1, 1.2, 1],
-              rotate: [0, 10, 0]
-            } : {}}
-            transition={{ 
-              duration: 0.5, 
-              delay: index * 0.1,
-              repeat: isHovered ? Infinity : 0
+            animate={{}}
+            transition={{
+              duration: 0.5,
+              delay: index * 0.1
             }}
           >
             {topping}

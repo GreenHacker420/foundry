@@ -98,7 +98,7 @@ export default function OrdersTable() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="w-full space-y-4">
       {/* Connection Status */}
       <ConnectionStatus
         connection={connection}
@@ -106,7 +106,7 @@ export default function OrdersTable() {
         compact={true}
       />
 
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 w-full">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 w-full overflow-hidden">
         {/* Filters */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex flex-col sm:flex-row gap-4">
@@ -139,8 +139,8 @@ export default function OrdersTable() {
         </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-full w-full">
           <thead className="bg-gray-50 dark:bg-gray-700">
             <tr>
               <th

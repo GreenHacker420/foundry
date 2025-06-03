@@ -1,9 +1,9 @@
-import DashboardLayout from "@/components/DashboardLayout"
+import ModernDashboardLayout from "@/components/ModernDashboardLayout"
 import StaffDashboard from "@/components/Gamification/StaffDashboard"
 
 export default function StaffPage() {
   return (
-    <DashboardLayout>
+    <ModernDashboardLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
@@ -16,6 +16,6 @@ export default function StaffPage() {
 
         <StaffDashboard />
       </div>
-    </DashboardLayout>
+    </ModernDashboardLayout>
   )
 }

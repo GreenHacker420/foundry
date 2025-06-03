@@ -1,9 +1,9 @@
-import DashboardLayout from "@/components/DashboardLayout"
+import ModernDashboardLayout from "@/components/ModernDashboardLayout"
 import OrderAnalytics from "@/components/Analytics/OrderAnalytics"
 
 export default function AnalyticsPage() {
   return (
-    <DashboardLayout>
+    <ModernDashboardLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
@@ -16,6 +16,6 @@ export default function AnalyticsPage() {
 
         <OrderAnalytics />
       </div>
-    </DashboardLayout>
+    </ModernDashboardLayout>
   )
 }

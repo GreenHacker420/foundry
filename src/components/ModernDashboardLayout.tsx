@@ -1,25 +1,25 @@
 import { auth, signOut } from "@/lib/auth"
 import { redirect } from "next/navigation"
-import DashboardLayoutClient from "./DashboardLayoutClient"
+import ModernDashboardLayoutClient from "./ModernDashboardLayoutClient"
 
-interface DashboardLayoutProps {
+interface ModernDashboardLayoutProps {
   children: React.ReactNode
 }
 
-export default async function DashboardLayout({ children }: DashboardLayoutProps) {
+export default async function ModernDashboardLayout({ children }: ModernDashboardLayoutProps) {
   const session = await auth()
-
+  
   if (!session) {
     redirect('/auth/signin')
   }
 
   return (
-    <DashboardLayoutClient
+    <ModernDashboardLayoutClient
       userImage={session.user?.image}
       userName={session.user?.name}
       userEmail={session.user?.email}
     >
       {children}
-    </DashboardLayoutClient>
+    </ModernDashboardLayoutClient>
   )
 }
