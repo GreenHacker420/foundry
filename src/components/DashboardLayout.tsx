@@ -2,9 +2,7 @@ import { auth, signOut } from "@/lib/auth"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { Home, ShoppingCart, LogOut, User, BarChart3, Users } from "lucide-react"
-import PizzaOven, { ChefCharacter } from "./3D/PizzaOven"
-import DarkModeToggle from "./DarkModeToggle"
-import { motion } from "framer-motion"
+import DashboardHeader, { UserMenu } from "./DashboardHeader"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -21,28 +19,12 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Navigation Header */}
       <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
-            <div className="flex items-center space-x-6">
-              <div className="flex-shrink-0 flex items-center space-x-4">
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="text-3xl cursor-pointer"
-                >
-                  🍕
-                </motion.div>
-                <span className="text-xl font-bold text-gray-900 dark:text-white">
-                  Pizza Dashboard
-                </span>
-              </div>
+            {/* Left side - Logo and 3D Elements */}
+            <DashboardHeader />
 
-              {/* 3D Interactive Elements */}
-              <div className="hidden lg:flex items-center space-x-6">
-                <PizzaOven />
-                <ChefCharacter />
-              </div>
-            </div>
-              
+            {/* Center - Navigation */}
             <div className="flex items-center space-x-8">
               {/* Desktop Navigation */}
               <div className="hidden md:flex md:space-x-6">
@@ -77,30 +59,13 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
               </div>
             </div>
 
-            {/* User Menu */}
+            {/* Right side - User Menu and Sign Out */}
             <div className="flex items-center space-x-4">
-              {/* Dark Mode Toggle */}
-              <DarkModeToggle />
-
-              <div className="flex items-center space-x-3">
-                {session.user?.image && (
-                  <motion.img
-                    className="h-10 w-10 rounded-full border-2 border-orange-200 dark:border-orange-600"
-                    src={session.user.image}
-                    alt={session.user.name || 'User'}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                )}
-                <div className="hidden md:block">
-                  <div className="text-sm font-medium text-gray-900 dark:text-white">
-                    {session.user?.name}
-                  </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {session.user?.email}
-                  </div>
-                </div>
-              </div>
+              <UserMenu
+                userImage={session.user?.image}
+                userName={session.user?.name}
+                userEmail={session.user?.email}
+              />
               
               <form
                 action={async () => {
@@ -108,15 +73,13 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
                   await signOut({ redirectTo: "/auth/signin" })
                 }}
               >
-                <motion.button
+                <button
                   type="submit"
                   className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-red-600 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <LogOut className="w-4 h-4 mr-2" />
                   <span className="hidden md:block">Sign Out</span>
-                </motion.button>
+                </button>
               </form>
             </div>
           </div>
@@ -158,14 +121,10 @@ export default async function DashboardLayout({ children }: DashboardLayoutProps
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+      <main className="w-full py-6 px-4 sm:px-6 lg:px-8">
+        <div className="w-full">
           {children}
-        </motion.div>
+        </div>
       </main>
     </div>
   )
