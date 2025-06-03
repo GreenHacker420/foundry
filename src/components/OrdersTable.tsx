@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import React, { useState, useMemo } from "react"
 import { mockOrders } from "@/data/mockOrders"
 import { PizzaOrder, OrderStatus } from "@/types"
 import { Search, Filter, ChevronUp, ChevronDown, Clock, Zap } from "lucide-react"
@@ -9,6 +9,8 @@ import { useRealTimeOrders } from "@/hooks/useRealTimeOrders"
 import OrderProgressIndicator from "./OrderProgressIndicator"
 import CountdownTimer from "./CountdownTimer"
 import ConnectionStatus from "./ConnectionStatus"
+import OrderConveyorBelt from "./3D/OrderConveyorBelt"
+import Interactive3DCard from "./3D/Interactive3DCard"
 
 type SortField = 'id' | 'customerName' | 'pizzaType' | 'quantity' | 'orderDate' | 'status'
 type SortDirection = 'asc' | 'desc'
@@ -214,8 +216,8 @@ export default function OrdersTable() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredAndSortedOrders.map((order) => (
-              <>
-                <tr key={order.id} className={clsx(
+              <React.Fragment key={order.id}>
+                <tr className={clsx(
                   'hover:bg-gray-50 transition-colors duration-200',
                   order.lastUpdated && new Date(order.lastUpdated).getTime() > Date.now() - 10000 && 'bg-orange-50'
                 )}>
@@ -249,10 +251,10 @@ export default function OrdersTable() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {order.progress ? (
-                      <OrderProgressIndicator
+                      <OrderConveyorBelt
                         progress={order.progress}
+                        orderId={order.id}
                         compact={true}
-                        showTimer={false}
                       />
                     ) : (
                       <span className="text-gray-400 text-sm">No progress data</span>
@@ -289,13 +291,13 @@ export default function OrdersTable() {
                     <td colSpan={9} className="px-6 py-6">
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {/* Progress Details */}
-                        <div>
-                          <h4 className="text-sm font-medium text-gray-900 mb-3">Order Progress</h4>
+                        <div className="lg:col-span-2">
+                          <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-3">Order Progress - 3D Conveyor Belt</h4>
                           {order.progress ? (
-                            <OrderProgressIndicator
+                            <OrderConveyorBelt
                               progress={order.progress}
+                              orderId={order.id}
                               compact={false}
-                              showTimer={true}
                             />
                           ) : (
                             <p className="text-gray-500 text-sm">No progress information available</p>
@@ -341,7 +343,7 @@ export default function OrdersTable() {
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
