@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pizza Order Dashboard",
   description: "Manage and track pizza orders with ease",
+  icons: {
+    icon: '/pizza.png',
+    shortcut: '/pizza.png',
+    apple: '/pizza.png',
+  },
 };
 
 export default function RootLayout({
