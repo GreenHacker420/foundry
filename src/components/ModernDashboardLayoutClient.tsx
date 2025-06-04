@@ -1,6 +1,6 @@
 "use client"
 
-import { signOut } from "@/lib/auth"
+import { signOut } from "next-auth/react"
 import ModernNavbar from "./ModernNavbar"
 
 interface ModernDashboardLayoutClientProps {
@@ -18,7 +18,7 @@ export default function ModernDashboardLayoutClient({
 }: ModernDashboardLayoutClientProps) {
   
   const handleSignOut = async () => {
-    await signOut({ redirectTo: "/auth/signin" })
+    await signOut({ callbackUrl: "/auth/signin" })
   }
 
   return (

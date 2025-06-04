@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Home, ShoppingCart, LogOut, BarChart3, Users, Menu, X } from "lucide-react"
 import DashboardHeader, { UserMenu } from "./DashboardHeader"
 import { useState } from "react"
-import { signOut } from "@/lib/auth"
+import { signOut } from "next-auth/react"
 
 interface DashboardLayoutClientProps {
   children: React.ReactNode
@@ -23,7 +23,7 @@ export default function DashboardLayoutClient({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const handleSignOut = async () => {
-    await signOut({ redirectTo: "/auth/signin" })
+    await signOut({ callbackUrl: "/auth/signin" })
   }
 
   return (
