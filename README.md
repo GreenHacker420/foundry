@@ -1,70 +1,25 @@
 # Pizza Order Dashboard
 
-A modern, full-stack web application for managing pizza orders with Google OAuth authentication. Built with Next.js 15, TypeScript, Tailwind CSS, and NextAuth.js v5.
+**Developer:** Harsh Hirawat
 
-## 🍕 Project Overview
+## Project Overview
 
-This application provides a comprehensive dashboard for pizza order management with the following features:
+A modern, full-stack web application for managing pizza orders with Google OAuth authentication. This application provides a comprehensive dashboard for pizza order management with an intuitive, responsive interface. Built with Next.js 15, TypeScript, Tailwind CSS, and NextAuth.js v5.
 
+### Key Features
 - **Google OAuth Authentication**: Secure login using Google accounts
 - **Protected Routes**: Dashboard pages are protected and require authentication
 - **Order Management**: View, search, filter, and sort pizza orders
 - **Responsive Design**: Mobile-first design that works on all devices
 - **Modern UI**: Clean, intuitive interface with status indicators and visual feedback
+- **3D Interactive Elements**: Advanced pizza-themed animations and visualizations
+- **Dark Mode Support**: Seamless theme switching with system preference detection
 
-## 🚀 Technology Stack
-
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Authentication**: NextAuth.js v5
-- **Icons**: Lucide React
-- **Deployment**: Vercel (recommended)
-
-## 📋 Features
-
-### Authentication System
-- Google OAuth integration with NextAuth.js v5
-- Automatic redirect to dashboard after login
-- Protected dashboard routes with middleware
-- Session management and secure logout
-
-### Dashboard Pages
-1. **Welcome Page** (`/dashboard`)
-   - Personalized greeting with user's Google profile
-   - Quick stats overview
-   - Navigation to other sections
-   - Recent activity feed
-
-2. **Orders Page** (`/dashboard/orders`)
-   - Comprehensive orders table with sortable columns
-   - Search functionality (customer name, order ID, pizza type)
-   - Status-based filtering
-   - Visual status indicators with color coding
-   - Responsive table design
-
-### Order Management
-- **Order Details**: ID, Customer Name, Pizza Type, Quantity, Date, Status
-- **Status Types**: Pending, Preparing, Out for Delivery, Delivered, Cancelled
-- **Sorting**: Click column headers to sort by any field
-- **Filtering**: Filter orders by status
-- **Search**: Real-time search across multiple fields
-
-### 🚀 Real-Time Features (NEW!)
-- **Live Order Updates**: Server-Sent Events (SSE) for real-time order status changes
-- **Animated Progress Indicators**: Visual progress tracking through order stages:
-  - 📥 Received → 👨‍🍳 Preparing → 🔥 Baking → 🚚 Out for Delivery → ✅ Delivered
-- **Countdown Timers**: Live delivery time estimates with urgency indicators
-- **Connection Status**: Real-time connection monitoring with auto-reconnect
-- **Visual Feedback**: Recently updated orders highlighted with animations
-- **Expandable Details**: Click "View Details" to see full progress timeline
-- **Offline Fallback**: Graceful degradation when connection is lost
-
-## 🛠️ Local Development Setup
+## Local Development Setup
 
 ### Prerequisites
-- Node.js 18+
-- npm, yarn, or pnpm
+- Node.js 18 or higher
+- npm, yarn, or pnpm package manager
 - Google Cloud Console account for OAuth setup
 
 ### Installation Steps
@@ -78,15 +33,11 @@ This application provides a comprehensive dashboard for pizza order management w
 2. **Install dependencies**
    ```bash
    npm install
-   # or
-   yarn install
-   # or
-   pnpm install
    ```
 
 3. **Environment Configuration**
 
-   Create a `.env.local` file in the root directory:
+   Create a `.env.local` file in the root directory with the following variables:
    ```env
    NEXTAUTH_URL=http://localhost:3000
    NEXTAUTH_SECRET=your-secret-key-here-change-in-production
@@ -94,219 +45,88 @@ This application provides a comprehensive dashboard for pizza order management w
    GOOGLE_CLIENT_SECRET=your-google-client-secret-here
    ```
 
-4. **Start the development server**
+   **Important:**
+   - DO NOT commit your actual OAuth client secret to the repository
+   - Generate a secure random string for `NEXTAUTH_SECRET` (you can use: `openssl rand -base64 32`)
+   - Obtain `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` from Google Cloud Console (see setup instructions below)
+
+4. **Google OAuth Setup**
+
+   To configure Google OAuth credentials:
+
+   a. Go to [Google Cloud Console](https://console.cloud.google.com/)
+   b. Create a new project or select an existing one
+   c. Enable the Google+ API
+   d. Navigate to "APIs & Services" > "OAuth consent screen"
+   e. Configure the consent screen with your app information
+   f. Go to "APIs & Services" > "Credentials"
+   g. Click "Create Credentials" > "OAuth 2.0 Client IDs"
+   h. Choose "Web application"
+   i. Add authorized redirect URIs:
+      - For development: `http://localhost:3000/api/auth/callback/google`
+      - For production: `https://yourdomain.com/api/auth/callback/google`
+   j. Copy the Client ID and Client Secret to your `.env.local` file
+
+5. **Start the development server**
    ```bash
    npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
    ```
 
-5. **Open your browser**
-
+6. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🔐 Google OAuth Setup Guide
+## Assumptions Made and Challenges Faced
 
-### Step 1: Create a Google Cloud Project
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Google+ API
+### Assumptions Made
+- Users have basic familiarity with React and Next.js development
+- Google OAuth is the preferred authentication method for the target audience
+- The application will primarily be used on modern browsers with JavaScript enabled
+- Pizza order data structure follows a standard format with common fields (ID, customer, pizza type, status, etc.)
+- Real-time updates are important for order management workflow
+- Mobile responsiveness is crucial for restaurant staff who may use tablets or phones
 
-### Step 2: Configure OAuth Consent Screen
-1. Navigate to "APIs & Services" > "OAuth consent screen"
-2. Choose "External" user type
-3. Fill in the required information:
-   - App name: "Pizza Order Dashboard"
-   - User support email: Your email
-   - Developer contact information: Your email
+### Challenges Faced
+- **NextAuth.js v5 Beta**: Working with the beta version required careful handling of breaking changes and limited documentation
+- **Real-time Updates**: Implementing Server-Sent Events (SSE) for live order updates while maintaining connection stability
+- **Mobile Responsiveness**: Creating a complex data table that works well on small screens without losing functionality
+- **State Management**: Managing real-time order updates while preserving user interactions (search, filters, sorting)
+- **Production Deployment**: Configuring OAuth redirects correctly for custom domains vs. Vercel default domains
+- **TypeScript Integration**: Ensuring full type safety across the application, especially with NextAuth.js v5 types
+- **Performance Optimization**: Balancing real-time features with application performance and memory usage
 
-### Step 3: Create OAuth 2.0 Credentials
-1. Go to "APIs & Services" > "Credentials"
-2. Click "Create Credentials" > "OAuth 2.0 Client IDs"
-3. Choose "Web application"
-4. Add authorized redirect URIs:
-   - For development: `http://localhost:3000/api/auth/callback/google`
-   - For production: `https://yourdomain.com/api/auth/callback/google`
-5. Copy the Client ID and Client Secret to your `.env.local` file
+## Third-Party Libraries Used
 
-### Step 4: Test the Integration
-1. Start your development server
-2. Navigate to the application
-3. Click "Sign in with Google"
-4. Complete the OAuth flow
+Beyond Next.js, NextAuth.js, and Tailwind CSS, this project uses the following third-party libraries:
 
-## 📁 Project Structure
+### Core Dependencies
+- **@auth/core** (^0.39.1) - Core authentication library for NextAuth.js v5
+- **lucide-react** (^0.511.0) - Modern icon library with React components
+- **clsx** (^2.1.1) - Utility for constructing className strings conditionally
+- **react-hot-toast** (^2.5.2) - Elegant toast notifications for React
 
-```
-src/
-├── app/
-│   ├── api/auth/[...nextauth]/     # NextAuth.js API routes
-│   ├── auth/signin/                # Sign-in page
-│   ├── dashboard/                  # Protected dashboard pages
-│   │   ├── orders/                 # Orders management page
-│   │   └── page.tsx               # Dashboard home
-│   ├── globals.css                # Global styles
-│   ├── layout.tsx                 # Root layout
-│   └── page.tsx                   # Home page (redirects to dashboard)
-├── components/
-│   ├── DashboardLayout.tsx        # Dashboard layout with navigation
-│   └── OrdersTable.tsx            # Orders table component
-├── data/
-│   └── mockOrders.ts              # Mock pizza order data
-├── lib/
-│   └── auth.ts                    # NextAuth.js configuration
-├── types/
-│   └── index.ts                   # TypeScript type definitions
-└── middleware.ts                  # Route protection middleware
-```
+### 3D and Animation Libraries
+- **@splinetool/react-spline** (^4.0.0) - 3D scene integration for interactive pizza elements
+- **@splinetool/runtime** (^1.9.99) - Runtime for Spline 3D scenes
+- **three** (^0.177.0) - 3D graphics library for advanced visualizations
+- **@types/three** (^0.177.0) - TypeScript definitions for Three.js
+- **framer-motion** (^12.15.0) - Production-ready motion library for React animations
 
-## 🚀 Deployment Instructions
+### Data Visualization
+- **recharts** (^2.15.3) - Composable charting library built on React components
 
-### Deploy to Vercel (Recommended)
+### Development Dependencies
+- **@tailwindcss/postcss** (^4) - PostCSS plugin for Tailwind CSS v4
+- **@types/node** (^20) - TypeScript definitions for Node.js
+- **@types/react** (^19) - TypeScript definitions for React
+- **@types/react-dom** (^19) - TypeScript definitions for React DOM
+- **eslint** (^9) - JavaScript/TypeScript linting utility
+- **eslint-config-next** (15.3.3) - ESLint configuration for Next.js projects
+- **typescript** (^5) - TypeScript language support
 
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Connect to Vercel**
-   - Go to [Vercel](https://vercel.com)
-   - Import your GitHub repository
-   - Configure environment variables in Vercel dashboard
-
-3. **Environment Variables**
-   Add these to your Vercel project settings:
-   ```
-   NEXTAUTH_URL=https://your-domain.vercel.app
-   NEXTAUTH_SECRET=your-production-secret-key
-   GOOGLE_CLIENT_ID=your-google-client-id
-   GOOGLE_CLIENT_SECRET=your-google-client-secret
-   ```
-
-4. **Update Google OAuth Settings**
-   - Add your production domain to authorized redirect URIs
-   - Update OAuth consent screen if needed
-
-### Alternative: Deploy to Railway
-
-1. **Connect Repository**
-   - Go to [Railway](https://railway.app)
-   - Connect your GitHub repository
-
-2. **Configure Environment Variables**
-   - Add the same environment variables as above
-   - Update NEXTAUTH_URL to your Railway domain
-
-## 🎨 UI/UX Features
-
-### Design Principles
-- **Mobile-First**: Responsive design starting from 320px width
-- **Accessibility**: WCAG 2.1 AA compliant design
-- **Modern Aesthetics**: Clean, professional interface
-- **Intuitive Navigation**: Clear visual hierarchy and user flow
-
-### Visual Elements
-- **Color Coding**: Status-based color indicators for orders
-- **Interactive Elements**: Hover states and smooth transitions
-- **Loading States**: Visual feedback for async operations
-- **Error Handling**: User-friendly error messages
-
-## 🔧 Development Features
-
-### Code Quality
-- **TypeScript**: Full type safety throughout the application
-- **ESLint**: Code linting and formatting
-- **Component Architecture**: Reusable, modular components
-- **Server Actions**: Modern Next.js server-side functionality
-
-### Performance
-- **App Router**: Latest Next.js routing system
-- **Optimized Images**: Next.js Image component
-- **Font Optimization**: Google Fonts with Next.js font optimization
-- **Bundle Optimization**: Automatic code splitting and optimization
-
-### Real-Time Architecture
-- **Server-Sent Events (SSE)**: Primary real-time communication method
-- **Custom React Hook**: `useRealTimeOrders` for state management
-- **Automatic Reconnection**: Smart retry logic with exponential backoff
-- **Connection Monitoring**: Heartbeat system with visual status indicators
-- **Graceful Degradation**: Offline mode when connection fails
-- **Memory Management**: Automatic cleanup and connection limits
-
-## 🧪 Testing Recommendations
-
-To ensure the application works correctly, test the following scenarios:
-
-1. **Authentication Flow**
-   - Sign in with Google
-   - Access protected routes
-   - Sign out functionality
-
-2. **Dashboard Functionality**
-   - Navigation between pages
-   - User profile display
-   - Responsive design on different screen sizes
-
-3. **Orders Management**
-   - Table sorting by different columns
-   - Search functionality
-   - Status filtering
-   - Mobile table responsiveness
-
-4. **Real-Time Features**
-   - Connection status indicator (should show "Connected" with green indicator)
-   - Live order updates (orders will automatically update every 5-15 seconds)
-   - Progress indicators showing current stage with animations
-   - Countdown timers for active orders
-   - Expandable row details with full progress timeline
-   - Recently updated orders highlighted in orange
-
-## 🔮 Future Enhancements
-
-Potential improvements and features for future development:
-
-- **Real-time Updates**: WebSocket integration for live order updates
-- **Order Creation**: Add new order functionality
-- **Status Management**: Update order status directly from dashboard
-- **Analytics Dashboard**: Charts and metrics for order insights
-- **Export Functionality**: Export orders to CSV/PDF
-- **Pagination**: Handle large datasets with pagination
-- **Advanced Filtering**: Date range, customer filters
-- **Notifications**: Email/SMS notifications for order updates
-- **Multi-tenant Support**: Support for multiple restaurants
-- **Order History**: Detailed order tracking and history
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **OAuth Errors**
-   - Verify Google Cloud Console configuration
-   - Check redirect URIs match exactly
-   - Ensure environment variables are set correctly
-
-2. **Build Errors**
-   - Clear `.next` folder and rebuild
-   - Check for TypeScript errors
-   - Verify all dependencies are installed
-
-3. **Styling Issues**
-   - Ensure Tailwind CSS is properly configured
-   - Check for conflicting CSS classes
-   - Verify responsive breakpoints
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📞 Support
-
-For questions or support, please open an issue in the GitHub repository.
+### Key Features Enabled by Libraries
+- **3D Pizza Visualizations**: Spline and Three.js enable interactive 3D pizza models and loaders
+- **Smooth Animations**: Framer Motion provides fluid transitions and micro-interactions
+- **Toast Notifications**: React Hot Toast delivers user feedback for actions
+- **Flexible Icons**: Lucide React offers a comprehensive, customizable icon set
+- **Data Charts**: Recharts enables analytics dashboards with pizza order metrics
+- **Conditional Styling**: clsx simplifies dynamic CSS class management
